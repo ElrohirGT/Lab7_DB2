@@ -1,5 +1,16 @@
 name: lab7-DB2
+
 services:
+  mongo_source: 
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_DATABASE: 'turistic_costs'
+    volumes:
+      - ./data/Datos_para_MongoDB:/docker-entrypoint-initdb.d/
+      - mongo_source_data:/data/db
+
     
   pg_source:
     image: postgres

@@ -1,4 +1,6 @@
-[
+db = db.getSiblingDB('turistic_costs');
+
+db.general_costs.insertMany([
     {
         "continente": "África",
         "región": "África Austral",
@@ -579,4 +581,4 @@
             }
         }
     }
-]
+])

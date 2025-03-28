@@ -1,4 +1,6 @@
-[
+db = db.getSiblingDB('turistic_costs');
+
+db.big_mac_costs.insertMany([
     {
         "país": "Albania",
         "continente": "Europa",
@@ -529,4 +531,4 @@
         "continente": "América",
         "precio_big_mac_usd": 2.93
     }
-]
+])

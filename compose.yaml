@@ -25,6 +25,19 @@ services:
       - ./data/Datos_para_SQL:/docker-entrypoint-initdb.d/
       - mongo_source_data:/data/db
 
+  datawarehouse:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: admin
+      POSTGRES_DB: metrics
+    volumes:
+      - ./data/Datawarehouse:/docker-entrypoint-initdb.d/
+      - datawarehouse:/data/db
+
 
 volumes:
   mongo_source_data:

@@ -1,0 +1,24 @@
+name: lab7-DB2
+services:
+    
+  pg_source:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: admin
+      POSTGRES_DB: countries
+    volumes:
+      - ./data/Datos_para_SQL:/docker-entrypoint-initdb.d/
+      - mongo_source_data:/data/db
+
+
+volumes:
+  mongo_source_data:
+    driver: local
+  pg_source_data:
+    driver: local
+  datawarehouse:
+    driver: local

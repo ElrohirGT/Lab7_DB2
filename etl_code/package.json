@@ -1,0 +1,17 @@
+{
+  "name": "etl_code",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "tsc main.ts --outDir build/ && node build/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "mongodb": "6.15",
+    "pg": "^8.14.1",
+    "typescript": "^5.8.2"
+  }
+}

@@ -14,9 +14,6 @@ importers:
       pg:
         specifier: ^8.14.1
         version: 8.14.1
-      typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
 
 packages:
 
@@ -131,11 +128,6 @@ packages:
     resolution: {integrity: sha512-IUWnUK7ADYR5Sl1fZlO1INDUhVhatWl7BtJWsIhwJ0UAK7ilzzIa8uIqOO/aYVWHZPJkKbEL+362wrzoeRF7bw==}
     engines: {node: '>=18'}
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
@@ -231,8 +223,6 @@ snapshots:
   tr46@5.1.0:
     dependencies:
       punycode: 2.3.1
-
-  typescript@5.8.2: {}
 
   webidl-conversions@7.0.0: {}
 

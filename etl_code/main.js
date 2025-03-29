@@ -70,6 +70,7 @@ try {
 	const database = MONGO_SOURCE_CLIENT.db("turistic_costs");
 	const movies = database.collection("general_costs");
 
+	// Migrate MongoDB data...
 	const query = {};
 	const cursor = movies.find(query);
 	while (await cursor.hasNext()) {
@@ -77,7 +78,6 @@ try {
 		if (next === null) {
 			throw new Error("NEXT CANT BE NULL!");
 		}
-		console.log(next);
 
 		const costos = next.costos_diarios_estimados_en_dólares;
 		/** @type {ETLRow} */
@@ -97,6 +97,42 @@ try {
 
 		await insertETLRow(PG_RESULT_CLIENT, data);
 	}
+
+	// Migrate PostgresDB data...
+	const result = await PG_SOURCE_CLIENT.query(
+		`select 
+	pp.continente ,
+	pp.pais ,
+	pe.capital ,
+	pe.region ,
+	pe.poblacion ,
+	pe.tasa_de_envejecimiento ,
+	pp.costo_bajo_hospedaje ,
+	pp.costo_promedio_comida ,
+	pp.costo_bajo_transporte ,
+	pp.costo_promedio_entretenimiento 
+from pais_poblacion pp 
+left join pais_envejecimiento pe on pe.nombre_pais = pp.pais`,
+		[],
+	);
+
+	for (let i = 0; i < result.rowCount; i++) {
+		const row = result.rows[i];
+		/** @type{ETLRow} */
+		const data = {
+			continente: row.continente,
+			pais: row.pais,
+			capital: row.capital,
+			region: row.region,
+			poblacion: row.poblacion,
+			tasaEnvejecimiento: row.tasa_de_envejecimiento,
+			costoBajoHospedaje: row.costo_bajo_hospedaje,
+			costoPromedioComida: row.costo_promedio_comida,
+			costoBajoTransporte: row.costo_bajo_transporte,
+			costoPromedioEntretenimiento: row.costo_promedio_entretenimiento,
+		};
+		await insertETLRow(PG_RESULT_CLIENT, data);
+	}
 } catch (e) {
 	console.error(e);
 } finally {
@@ -105,4 +141,4 @@ try {
 	await MONGO_SOURCE_CLIENT.close();
 }
 
-console.log("Hello world!");
+console.log("Done!");
